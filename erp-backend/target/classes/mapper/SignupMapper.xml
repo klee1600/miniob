@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nju.edu.erp.dao.SignupDao">
+
+
+    <select id="countMonthlyTickTimes" resultType="java.lang.Integer">
+        select count(*)
+        from signup
+        where uid = #{uid}
+          and year(time) = #{year}
+          and month(time) = #{month}
+    </select>
+
+    <select id="check" resultType="java.lang.Integer"> select count(*) from signup where uid = #{uid} and year(time) = #{year} and month(time) = #{month} and day(time) = #{day} </select>
+</mapper>

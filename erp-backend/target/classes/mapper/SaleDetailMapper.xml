@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nju.edu.erp.dao.SaleDetailDao">
+
+    <select id="getSaleDetailList" resultType="com.nju.edu.erp.model.vo.SaleDetailVO">
+        select s.create_time as createDate, p.name as pname, p.type as type, sc.quantity as quantity, sc.unit_price as unitPrice, sc.total_price as totalPrice, 'Sale' as detailType
+        from sale_sheet s, sale_sheet_content sc, customer c, product p
+        where s.salesman = #{salesman} and date(s.create_time) between #{beginTime} and #{endTime} and s.supplier = c.id and c.name = #{customer} and s.id = sc.sale_sheet_id and sc.pid = p.id and p.name = #{pname};
+    </select>
+
+    <select id="getSaleReturnsDetailList" resultType="com.nju.edu.erp.model.vo.SaleDetailVO">
+        select sr.create_time as createDate, p.name as pname, p.type as type, src.quanlity as quantity, src.unit_price as unitPrice, src.total_price as totalPrice, 'SaleReturns' as detailType
+        from sale_returns_sheet sr, sale_returns_sheet_content src, product p
+        where sr.salesman = #{salesman} and date(sr.create_time) between #{beginTime} and #{endTime} and sr.customer = #{customer} and sr.id = src.sale_sheet_returns_id and src.pid = p.id and p.name = #{pname};
+    </select>
+
+</mapper>

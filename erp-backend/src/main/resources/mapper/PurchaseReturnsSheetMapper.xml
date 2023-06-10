@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nju.edu.erp.dao.PurchaseReturnsSheetDao">
+
+
+    <select id="getLatest" resultType="com.nju.edu.erp.model.po.PurchaseReturnsSheetPO">
+        select *
+        from purchase_returns_sheet
+        order by id desc
+        limit 0,1;
+    </select>
+
+    <select id="findAllSheet" resultType="com.nju.edu.erp.model.po.PurchaseReturnsSheetPO">
+        select * from purchase_returns_sheet;
+    </select>
+
+    <select id="findAllSheetByState" resultType="com.nju.edu.erp.model.po.PurchaseReturnsSheetPO">
+        select * from purchase_returns_sheet where state = #{state};
+    </select>
+
+    <select id="findAllSheetByTime" resultType="com.nju.edu.erp.model.po.PurchaseReturnsSheetPO">
+        select * from purchase_returns_sheet where create_time between #{beginTime} and #{endTime};
+    </select>
+
+    <select id="findContentBySheetId" resultType="com.nju.edu.erp.model.po.PurchaseReturnsSheetContentPO">
+        select * from purchase_returns_sheet_content where purchase_returns_sheet_id = #{sheetId};
+    </select>
+
+    <select id="findSheetById" resultType="com.nju.edu.erp.model.po.PurchaseReturnsSheetPO">
+        select * from purchase_returns_sheet where id = #{id};
+    </select>
+</mapper>
